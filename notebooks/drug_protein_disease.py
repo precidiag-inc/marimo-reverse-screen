@@ -48,7 +48,13 @@ def _(List, pd):
 
 @app.cell
 def _(mo, pl):
-    final_results = pl.read_csv(str(mo.notebook_location() / "public" / "drug_protein_disease_taxa.csv"))
+    final_results_dict = pl.read_csv(str(mo.notebook_location() / "public" / "drug_protein_disease_taxa.csv")).to_dicts()
+    return (final_results_dict,)
+
+
+@app.cell
+def _(final_results_dict, pd):
+    final_results = pd.DataFrame(final_results_dict)
     return (final_results,)
 
 
@@ -143,11 +149,6 @@ def _(final_results, mask, mo, path, px):
         )
     mofig
     return (mofig,)
-
-
-@app.cell
-def _():
-    return
 
 
 if __name__ == "__main__":
