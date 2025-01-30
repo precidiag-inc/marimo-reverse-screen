@@ -14,13 +14,14 @@ def _():
 def _():
     import pandas as pd
     import numpy as np
-    return np, pd
+    import polars as pl
+    return np, pd, pl
 
 
 @app.cell
 async def _():
     import micropip
-    await micropip.install('plotly')
+    await micropip.install('plotly==5.18.0')
     import plotly.express as px
     return micropip, px
 
@@ -46,8 +47,8 @@ def _(List, pd):
 
 
 @app.cell
-def _(mo, pd):
-    final_results = pd.read_csv(str(mo.notebook_location() / "public" / "drug_protein_disease_taxa.csv.gz"))
+def _(mo, pl):
+    final_results = pl.read_csv(str(mo.notebook_location() / "public" / "drug_protein_disease_taxa.csv"))
     return (final_results,)
 
 
