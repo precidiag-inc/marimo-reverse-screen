@@ -20,7 +20,7 @@ def _():
 @app.cell
 async def _():
     import micropip
-    await micropip.install('plotly==5.9.0')
+    await micropip.install('plotly')
     import plotly.express as px
     return micropip, px
 
