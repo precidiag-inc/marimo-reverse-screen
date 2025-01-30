@@ -7,15 +7,22 @@ app = marimo.App(width="medium")
 @app.cell
 def _():
     import marimo as mo
+    return (mo,)
+
+
+@app.cell
+def _():
     import pandas as pd
     import numpy as np
-    import os
-    import networkx as nx
-    import plotly.express as px
+    return np, pd
 
-    from itertools import product
-    directory = 'data/raw/'
-    return directory, mo, np, nx, os, pd, product, px
+
+@app.cell
+async def _():
+    import micropip
+    await micropip.install('plotly==5.9.0')
+    import plotly.express as px
+    return micropip, px
 
 
 @app.cell
@@ -39,8 +46,8 @@ def _(List, pd):
 
 
 @app.cell
-def _(pd):
-    final_results = pd.read_csv('drug_protein_disease_taxa.csv')
+def _(mo, pd):
+    final_results = pd.read_csv(str(mo.notebook_location() / "public" / "drug_protein_disease_taxa.csv"))
     return (final_results,)
 
 
