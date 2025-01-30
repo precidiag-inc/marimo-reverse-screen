@@ -47,7 +47,7 @@ def _(List, pd):
 
 @app.cell
 def _(mo, pd):
-    final_results = pd.read_csv(str(mo.notebook_location() / "public" / "drug_protein_disease_taxa.csv"))
+    final_results = pd.read_csv(str(mo.notebook_location() / "public" / "drug_protein_disease_taxa.csv.gz"))
     return (final_results,)
 
 
